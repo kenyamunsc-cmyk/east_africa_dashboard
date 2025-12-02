@@ -1,0 +1,11 @@
+import geopandas as gpd
+
+# Load shapefile (adjust path)
+gdf = gpd.read_file("path/to/ESA_admin1_shapefile.shp")
+
+# Optionally filter to East Africa countries (assuming there is a country field, e.g. 'ADM0_NAME')
+EA_countries = ["Kenya","Uganda","Tanzania","Rwanda","Burundi","Ethiopia"]
+ea = gdf[gdf["ADM0_NAME"].isin(EA_countries)].copy()
+
+# Save as GeoJSON
+ea.to_file("east_africa_admin1.geojson", driver="GeoJSON")
